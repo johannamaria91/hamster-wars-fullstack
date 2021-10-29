@@ -1,26 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import StartPage from './components/StartPage';
+import Battle from './components/Battle';
+import { Link, Switch, Route } from 'react-router-dom';
+import Gallery from './components/Gallery';
+
 
 function App() {
+
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className="app">
+      <header>
+        <h1>Välkommen till Hamster Wars</h1>
+        <nav>
+          
+          <Link to="/"> Start </Link>
+          <Link to="/battle"> Tävla</Link>
+          <Link to="/gallery"> Galleri </Link>
+          {/* <Link to="/error"> Felaktig länk </Link></nav> */}
+          
+        </nav>
       </header>
+      <main>
+       
+        <Switch>
+          <Route path="/" exact> <StartPage /> </Route>
+          <Route path="/battle" exact> <Battle /> </Route>
+          <Route path="/gallery"> <Gallery /></Route>
+{/*           <Route path="/results" render={(OverlayProps) => <ResultsOverlay winnerId={''} loserId={''} {...OverlayProps} />}/> 
+ */}        </Switch>
+        
+        
+      </main>
     </div>
   );
 }
 
 export default App;
+
