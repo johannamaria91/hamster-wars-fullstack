@@ -1,10 +1,9 @@
 /* import './Overlay.css'; */
-import { addHamsterObject } from '../models/AddHamsterObject';
 import {useState} from "react";
 
 interface OverlayProps {
     close: () => void;
-    addHamster: (hamster: addHamsterObject) => void;
+    addHamster: () => void;
 }
 
 const Overlay = ({ close, addHamster }: OverlayProps) => {
@@ -18,16 +17,25 @@ const Overlay = ({ close, addHamster }: OverlayProps) => {
     const [imgName, setImgName] = useState<string>('')
     
 
-    const handleAddHamster = () => {
-        let hamster: addHamsterObject = {name: name, age: age, games: games, wins: wins, defeats: defeats, loves: loves, favFood: favFood, imgName: imgName}
-        addHamster(hamster)
+    const handleAddHamster = async () => {
+        let hamster = {name: name, age: age, games: games, wins: wins, defeats: defeats, loves: loves, favFood: favFood, imgName: imgName}
+        const newHamster = hamster;
+        const response = await fetch('/hamsters', {
+            method: 'POST',
+            body: JSON.stringify(newHamster),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+        const newArray = await response.json()
+        addHamster()
         close()
     }
 
     return (
         <div className="add-hamster-overlay">
-        Overlay!
-        <div className="dialog">
+        
+        <form>
             <input type="text" placeholder="Hamsterns namn" 
             value={name} 
             onChange={event => setName(event.target.value)}/>
@@ -62,7 +70,7 @@ const Overlay = ({ close, addHamster }: OverlayProps) => {
         <br />
     <button  onClick={close}>Close</button>
 
-        </div>
+        </form>
     
     </div>
     )

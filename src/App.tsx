@@ -4,6 +4,7 @@ import StartPage from './components/StartPage';
 import Battle from './components/Battle';
 import { Link, Switch, Route } from 'react-router-dom';
 import Gallery from './components/Gallery';
+import Statistics from './components/Statistics';
 
 
 function App() {
@@ -20,6 +21,8 @@ function App() {
           <Link to="/"> Start </Link>
           <Link to="/battle"> Tävla</Link>
           <Link to="/gallery"> Galleri </Link>
+          <Link to="/stats"> Statistik </Link>
+          <Link to="/history"> Historik </Link>
           {/* <Link to="/error"> Felaktig länk </Link></nav> */}
           
         </nav>
@@ -30,6 +33,7 @@ function App() {
           <Route path="/" exact> <StartPage /> </Route>
           <Route path="/battle" exact> <Battle /> </Route>
           <Route path="/gallery"> <Gallery /></Route>
+          <Route path="/stats"> <Statistics/></Route>
 {/*           <Route path="/results" render={(OverlayProps) => <ResultsOverlay winnerId={''} loserId={''} {...OverlayProps} />}/> 
  */}        </Switch>
         

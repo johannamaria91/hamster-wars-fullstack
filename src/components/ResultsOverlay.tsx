@@ -13,12 +13,6 @@ interface OverlayProps {
 
 const ResultsOverlay = ({ winner, loser, setShowResults}:OverlayProps) => {
  
-    
-        
-        
-   
-
-   
     return(
         
         

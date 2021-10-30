@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { Hamster } from "../models/Hamster"
-import { addHamsterObject } from '../models/AddHamsterObject';
-import HamsterOverlay from './HamsterOverlay'
+import Overlay from './HamsterOverlay'
 import bin from '../icons/bin.svg'
 
 
@@ -11,23 +10,15 @@ const Gallery = () => {
     const [hamsterArray, setHamsterArray] = useState<Hamster[] | null>(null)
     const [showAddHamsterOverlay, setShowAddHamsterOverlay] = useState<boolean>(false);
 
-    const addHamster = async (hamster: addHamsterObject) => {
-        const newHamster = hamster;
-        const response = await fetch('/hamsters', {
-            method: 'POST',
-            body: JSON.stringify(newHamster),
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            }
-        })
-        const newArray = await response.json()
+    const addHamster = async () => {
+        
         getHamsters()
     }
 
     let addHamsterOverlay = null;
     if (showAddHamsterOverlay) {
         const closeOverlay = () => setShowAddHamsterOverlay(false);
-        addHamsterOverlay = <HamsterOverlay close={closeOverlay} addHamster={addHamster}/>
+        addHamsterOverlay = <Overlay close={closeOverlay} addHamster={addHamster}/>
       }
 
     useEffect(() => {
