@@ -5,6 +5,7 @@ import Battle from './components/Battle';
 import { Link, Switch, Route } from 'react-router-dom';
 import Gallery from './components/Gallery';
 import Statistics from './components/Statistics';
+import History from './components/History';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
           <Route path="/battle" exact> <Battle /> </Route>
           <Route path="/gallery"> <Gallery /></Route>
           <Route path="/stats"> <Statistics/></Route>
+          <Route path="/history"> <History/></Route>
 {/*           <Route path="/results" render={(OverlayProps) => <ResultsOverlay winnerId={''} loserId={''} {...OverlayProps} />}/> 
  */}        </Switch>
         

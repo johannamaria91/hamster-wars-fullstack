@@ -160,3 +160,69 @@
   border-radius: .5em;
   
 }
+
+/* History  */
+
+.match-card {
+  margin: 2em;
+  padding: 1em;
+  height: 15em;
+  width: 30em;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  border: 1px solid rgb(241, 166, 74);
+  border-radius: .5em;
+  background-color: rgb(241, 166, 74);
+}
+
+.match-card figure {
+  height: 10em;
+  width: 10em;
+}
+
+.match-card img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: .5em;
+}
+
+
+/* Battle */ 
+
+.battle {
+  display: flex;
+  flex-direction: row;
+}
+
+.battle-card {
+  border: 1px solid rgb(241, 166, 74);
+  border-radius: .5em;
+  background-color: rgb(241, 166, 74);
+  text-align: center;
+  max-width: 20em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2em;
+  margin: 1em;
+}
+
+.battle-card figure {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  width: 13em;
+  height: 13em;
+}
+
+.battle-card img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: .5em;
+  
+}
