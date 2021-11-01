@@ -6,7 +6,7 @@ import { Link, Switch, Route } from 'react-router-dom';
 import Gallery from './components/Gallery';
 import Statistics from './components/Statistics';
 import History from './components/History';
-
+import hamster from './icons/hamster.svg'
 
 function App() {
 
@@ -16,7 +16,10 @@ function App() {
   return (
     <div className="app">
       <header>
-        <h1>Välkommen till Hamster Wars</h1>
+        <section className="logo">
+          <img src={hamster} alt="hamster-logo"/>
+          <h1>Hamster Wars</h1>
+        </section>
         <nav>
           
           <Link to="/"> Start </Link>

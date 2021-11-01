@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Hamster } from "../models/Hamster"
 import Overlay from './HamsterOverlay'
 import bin from '../icons/bin.svg'
+import MatchWinners from "./MatchWInners"
 
 
 
@@ -9,7 +10,9 @@ import bin from '../icons/bin.svg'
 const Gallery = () => {
     const [hamsterArray, setHamsterArray] = useState<Hamster[] | null>(null)
     const [showAddHamsterOverlay, setShowAddHamsterOverlay] = useState<boolean>(false);
-
+    const [showMatchwinners, setShowMatchwinners] = useState<boolean>(false)
+    const [chosenId, setChosenId] = useState<string>('')
+ 
     const addHamster = async () => {
         
         getHamsters()
@@ -41,36 +44,67 @@ const Gallery = () => {
     let showOverlay = () => {
         setShowAddHamsterOverlay(true)
     }
+
+
+    let matchwinnersPage = null;
+    if (showMatchwinners) {
+        const backToGallery = () => setShowMatchwinners(false);
+        matchwinnersPage = <MatchWinners close={backToGallery} id={chosenId}/>
+      }
+
+    let showDefeatedHamsters = (id: string) => {
+        setShowMatchwinners(true)
+        setChosenId(id)
+    } 
+
     return (
         <section className="gallery">
 <button className="add-hamster-btn" onClick={showOverlay}> Lägg till ny hamster! </button>
     {addHamsterOverlay}
 
  <section className="grid-container">
-       {hamsterArray?.map(hamster => 
-            <section className="flip-card" key={hamster.id}>
-                <section className="flip-card-inner">
-                     <article className="hamster-card-front" >
-                        <figure><img src={`/img/${hamster.imgName}`} alt={hamster.name}/></figure>
-                        <h3>{hamster.name}</h3>
-                     </article>
-                    <article className="hamster-card-back">
-                        <h2>{hamster.name}</h2>
-                        <p>Ålder: {hamster.age}</p>
-                        <p>Älskar: {hamster.loves}</p>
-                        <p>Antal matcher: {hamster.games}</p>
-                        <p>Antal vinster: {hamster.wins}</p>
-                        <p>Antal förluster: {hamster.defeats}</p>
-                        <p>Favvomat: {hamster.favFood}</p>
-                        <button onClick={()=>deleteHamster(hamster.id)}><img src={bin} alt="bin"/></button>
-                    </article> 
-                </section>
-            </section>
 
-          
-           
-       )}
+     {matchwinnersPage
+     ? matchwinnersPage 
+     : hamsterArray?.map(hamster => 
+        <section className="flip-card" key={hamster.id}>
+            <section className="flip-card-inner">
+                 <article className="hamster-card-front" >
+                    <figure><img src={`/img/${hamster.imgName}`} alt={hamster.name}/></figure>
+                    <h3>{hamster.name}</h3>
+                 </article>
+                <article className="hamster-card-back">
+                    <h2>{hamster.name}</h2>
+                    <p>Ålder: {hamster.age}</p>
+                    <p>Älskar: {hamster.loves}</p>
+                    <p>Antal matcher: {hamster.games}</p>
+                    <p>Antal vinster: {hamster.wins}</p>
+                    <p>Antal förluster: {hamster.defeats}</p>
+                    <p>Favvomat: {hamster.favFood}</p>
+                    <button onClick={()=>deleteHamster(hamster.id)}><img src={bin} alt="bin"/></button>
+                    <button onClick={()=>showDefeatedHamsters(hamster.id)} >Se alla hamstrar som {hamster.name} har vunnit över</button>
+               </article> 
+            </section>
+        </section>
+
+      
+       
+   )
+     
+     
+     }
+
+       
+
+
+
+
        </section>
+
+
+
+
+       
         </section>
    
     )

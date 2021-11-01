@@ -29,7 +29,7 @@ const NewBattle = ({pickWinner}:NewBattleProps) => {
     }, [])
 
     return (
-        <div>
+        <>
             <h3>May the best hamster win</h3>
         <section className="battle">
             <article className="battle-card">
@@ -52,7 +52,7 @@ const NewBattle = ({pickWinner}:NewBattleProps) => {
          
             
         </section>
-        </div>
+        </>
     ) 
 }
 

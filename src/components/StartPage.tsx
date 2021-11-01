@@ -25,7 +25,7 @@ const StartPage = () => {
 
 
     return (
-        <>
+        <section className="startpage">
             <h2>Hjälp oss att kora den sötaste hamstern!</h2>
             <p>Gå till tävlings-fliken och välj den sötaste hamstern.</p>
             <p>I galleriet hittar du alla tävlande hamstrar och kan se all info om dem</p>
@@ -34,9 +34,10 @@ const StartPage = () => {
             <section className="cutest-hamster" key="cutest">
                 <h3>The cutest hamster right now is: </h3>
                 <h2>{cutestHamster?.name}</h2>
-                <img src={`/img/${cutestHamster?.imgName}`} alt="cutest hamster" />
+                <figure><img src={`/img/${cutestHamster?.imgName}`} alt="cutest hamster" /></figure>
+                
             </section>
-        </>
+        </section>
     )
 
 

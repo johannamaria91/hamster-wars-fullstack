@@ -1,3 +1,92 @@
+body {
+  --dark-grey: rgb(42 44 44);
+  --hamster-orange: rgb(241, 166, 74)
+}
+
+.app {
+  text-align: center;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--hamster-orange);
+  padding: 1em;
+}
+
+header h1 {
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  flex-grow: 1;
+}
+
+ nav a{
+  text-decoration: none;
+  color: var(--dark-grey);
+  font-weight: bold;
+  font-size: 1em;
+  padding: 1em;
+}
+
+nav a:hover {
+  color: white;
+}
+
+main {
+  background-color: var(--dark-grey);
+  color: white;
+}
+
+/* Startpage */
+
+.startpage {
+  padding: 1em;
+}
+
+.startpage h2 {
+  margin-block-start: 0;
+}
+.cutest-hamster {
+  border: 1px solid var(--hamster-orange);
+  border-radius: .5em;
+  background-color: var(--hamster-orange);
+  text-align: center;
+  max-width: 20em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2em;
+  margin: auto;
+}
+
+.cutest-hamster figure {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  width: 13em;
+  height: 13em;
+}
+
+.cutest-hamster img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: .5em;
+  
+}
+
+/* Gallery */ 
+
 .grid-container {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -34,9 +123,9 @@
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  border: 1px solid rgb(241, 166, 74);
+  border: 1px solid var(--hamster-orange);
   border-radius: .5em;
-  background-color: rgb(241, 166, 74);
+  background-color: var(--hamster-orange);
   text-align: center;
   max-width: 20em;
   display: flex;
@@ -104,6 +193,9 @@
   display: inline-block;
 }
 
+
+/* Statistics */
+
 .top-five {
   display: flex;
   flex-direction: row;
@@ -121,9 +213,9 @@
 } 
 
 .top-five-card {
-  border: 1px solid rgb(241, 166, 74);
+  border: 1px solid var(--hamster-orange);
   border-radius: .5em;
-  background-color: rgb(241, 166, 74);
+  background-color: var(--hamster-orange);
   text-align: center;
   max-width: 20em;
   display: flex;
@@ -163,8 +255,12 @@
 
 /* History  */
 
+.match-card-container {
+  padding: 2em;
+}
+
 .match-card {
-  margin: 2em;
+  margin: 0 2em 2em;
   padding: 1em;
   height: 15em;
   width: 30em;
@@ -172,9 +268,9 @@
   flex-direction: row;
   text-align: center;
   align-items: center;
-  border: 1px solid rgb(241, 166, 74);
+  border: 1px solid var(--hamster-orange);
   border-radius: .5em;
-  background-color: rgb(241, 166, 74);
+  background-color: var(--hamster-orange);
 }
 
 .match-card figure {
@@ -197,10 +293,14 @@
   flex-direction: row;
 }
 
+main > h3{
+  margin-block-start: 0;
+}
+
 .battle-card {
-  border: 1px solid rgb(241, 166, 74);
+  border: 1px solid var(--hamster-orange);
   border-radius: .5em;
-  background-color: rgb(241, 166, 74);
+  background-color: var(--hamster-orange);
   text-align: center;
   max-width: 20em;
   display: flex;
