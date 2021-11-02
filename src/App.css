@@ -1,6 +1,7 @@
 body {
   --dark-grey: rgb(42 44 44);
-  --hamster-orange: rgb(241, 166, 74)
+  --hamster-orange: rgb(241, 166, 74);
+  --almost-white: rgb(255, 253, 245);
 }
 
 .app {
@@ -38,12 +39,13 @@ nav {
 }
 
 nav a:hover {
-  color: white;
+  color: var(--almost-white);
 }
 
 main {
   background-color: var(--dark-grey);
-  color: white;
+  color: var(--almost-white);
+  padding: 1.5em;
 }
 
 /* Startpage */
@@ -291,10 +293,7 @@ main {
 .battle {
   display: flex;
   flex-direction: row;
-}
-
-main > h3{
-  margin-block-start: 0;
+  justify-content: center;
 }
 
 .battle-card {
@@ -325,4 +324,29 @@ main > h3{
   height: 100%;
   border-radius: .5em;
   
+}
+
+.results-card-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.overlay {
+  padding: 1.5em;
+}
+
+.overlay h2{
+  margin-block-start: 0;
+}
+
+button {
+  margin: 1em 0;
+  border: none;
+  border-radius: 5em;
+  background: var(--almost-white);
+  color: var(--dark-grey);
+  padding: 1em 2em;
+  cursor: pointer;
 }

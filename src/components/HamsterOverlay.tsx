@@ -32,6 +32,7 @@ const Overlay = ({ close, addHamster }: OverlayProps) => {
         close()
     }
 
+
     return (
         <div className="add-hamster-overlay">
         
@@ -53,7 +54,7 @@ const Overlay = ({ close, addHamster }: OverlayProps) => {
             value={defeats} 
             onChange={event => setDefeats(event.target.valueAsNumber)}/>
 
-            <input type="text" placeholder="Hamstern älskar..." 
+            <input type="text" placeholder="Hamstern älskar att..." 
             value={loves} 
             onChange={event => setLoves (event.target.value)}/>
 

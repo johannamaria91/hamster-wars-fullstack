@@ -3,25 +3,28 @@ import { Hamster } from '../models/Hamster'
 
 
 const StartPage = () => {
-    const [cutestHamster, setCutestHamster] = useState<Hamster>()
+    const [cutestHamster, setCutestHamster] = useState<Hamster[] | null>(null)
 
     useEffect(() => {
-        async function sendRequest() {
-            const response = await fetch('/hamsters/cutest')
-            const data = await response.json()
+         async function sendRequest() {
+        const response = await fetch('/hamsters/cutest')
+        const data = await response.json()
 
 
-            if (data && data.length > 1) {
-                setCutestHamster(data[Math.floor(Math.random() * data.length)])
-            } else if (data && data.length === 1) {
-                setCutestHamster(data)
-            }
+        if (data && data.length > 1) {
+            setCutestHamster([data[Math.floor(Math.random() * data.length)]])
+        } else if (data && data.length === 1) {
+            setCutestHamster([data[0]])
         }
+    }
 
         sendRequest()
     }, [])
 
 
+   
+
+  
 
 
     return (
@@ -30,13 +33,18 @@ const StartPage = () => {
             <p>Gå till tävlings-fliken och välj den sötaste hamstern.</p>
             <p>I galleriet hittar du alla tävlande hamstrar och kan se all info om dem</p>
 
-
-            <section className="cutest-hamster" key="cutest">
+        {
+            cutestHamster?.map(hamster => 
+                 <section className="cutest-hamster" key="cutest">
                 <h3>The cutest hamster right now is: </h3>
-                <h2>{cutestHamster?.name}</h2>
-                <figure><img src={`/img/${cutestHamster?.imgName}`} alt="cutest hamster" /></figure>
+                <h2>{hamster.name}</h2>
+                <figure><img src={`/img/${hamster.imgName}`} alt="cutest hamster" /></figure>
                 
             </section>
+                
+                )
+        }
+           
         </section>
     )
 

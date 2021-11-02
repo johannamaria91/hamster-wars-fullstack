@@ -30,25 +30,29 @@ const NewBattle = ({pickWinner}:NewBattleProps) => {
 
     return (
         <>
-            <h3>May the best hamster win</h3>
+            <h2>May the best hamster win</h2>
         <section className="battle">
-            <article className="battle-card">
-                        <figure>
-                            <img src={`/img/${firstHamster?.imgName}`} alt="hamster 1" />
-                        </figure>
-                        <h3>{firstHamster?.name}</h3>
-                        <button onClick={(firstHamster && secondHamster)? () => pickWinner(firstHamster, secondHamster): undefined}>Välj {firstHamster?.name}</button>                
+            {(firstHamster && secondHamster)
+            ? <> <article className="battle-card">
+            <figure>
+                
+                <img src={`/img/${firstHamster?.imgName}`} alt="hamster 1" />
+            </figure>
+            <h3>{firstHamster?.name}</h3>
+            <button onClick={(firstHamster && secondHamster)? () => pickWinner(firstHamster, secondHamster): undefined}>Välj {firstHamster?.name}</button>                
 
-            </article>
+</article>
 
-            <article className="battle-card">
-                        <figure>
-                            <img src={`/img/${secondHamster?.imgName}`} alt="hamster 2" />                        
-                        </figure>
-                        <h3>{secondHamster?.name}</h3>
-                        <button onClick={(secondHamster && firstHamster)? () => pickWinner(secondHamster, firstHamster): undefined}>Välj {secondHamster?.name}</button>
+<article className="battle-card">
+            <figure>
+                <img src={`/img/${secondHamster?.imgName}`} alt="hamster 2" />                        
+            </figure>
+            <h3>{secondHamster?.name}</h3>
+            <button onClick={(secondHamster && firstHamster)? () => pickWinner(secondHamster, firstHamster): undefined}>Välj {secondHamster?.name}</button>
 
-            </article>
+</article> </>
+            : "Laddar tävlande..."}
+            
          
             
         </section>

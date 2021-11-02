@@ -32,7 +32,8 @@ const MatchWinners = ({close, id}:MatchwinnersProps) => {
 
 
     return (
-        <>
+        <section className="grid-container">
+
         {matchwinners?.map(hamster => 
             <section className="flip-card" key={hamster.id}>
                 <section className="flip-card-inner">
@@ -48,12 +49,12 @@ const MatchWinners = ({close, id}:MatchwinnersProps) => {
                         <p>Antal vinster: {hamster.wins}</p>
                         <p>Antal förluster: {hamster.defeats}</p>
                         <p>Favvomat: {hamster.favFood}</p>
-                        <button onClick={close} >Tillbaka till galleriet</button>
+                        <button onClick={close}>Tillbaka till galleriet</button>
                     </article> 
                 </section>
             </section>
 
-)} </>
+)} </section>
     )
 }
 

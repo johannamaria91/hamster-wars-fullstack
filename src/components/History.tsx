@@ -1,18 +1,23 @@
 import { useEffect, useState } from "react"
 import {Match} from '../models/Match'
+import {Hamster} from '../models/Hamster'
 
 interface MatchWithNames {
     id: string,
     winnerName: string,
     winnerImg: string,
     loserName: string,
-    loserImg: string
-}
+    loserImg: string,
+/*     winnerId: string,
+    loserId: string
+ */}
 
 const History = () => {
 
 const [newMatchesArray, setNewMatchesArray] = useState<MatchWithNames[]>([])
-
+/* const [winnerHamster, setWinnerHamster] = useState<Hamster>()
+const [loserHamster, setLoserHamster] = useState<Hamster>()
+ */
 
 useEffect(()=> {
     
@@ -38,9 +43,13 @@ async function getMatches() {
             winnerName: winnerHamster.name,
             winnerImg: winnerHamster.imgName,
             loserName: loserHamster.name,
-            loserImg: loserHamster.imgName
-        }            
-        setNewMatchesArray(newMatchesArray => [...newMatchesArray, newMatchObject] )
+            loserImg: loserHamster.imgName,
+/*             winnerId: match.winnerId,
+            loserId: match.loserId
+ */        } 
+/*         setWinnerHamster(winnerHamster)
+        setLoserHamster(loserHamster)           
+ */        setNewMatchesArray(newMatchesArray => [...newMatchesArray, newMatchObject] )
 
     })
         
@@ -48,10 +57,28 @@ async function getMatches() {
 
 
 
-    let deleteMatch = async (id:string) => {
-        await fetch('/matches/'+id, {
+    let deleteMatch = async (match: MatchWithNames, /* winnerHamster: Hamster, loserHamster:Hamster */) => {
+        await fetch('/matches/'+match.id, {
             method: 'DELETE'
         }) 
+
+       /*  await fetch('/matches/'+match.winnerId, {
+            method: 'PUT',
+            body: JSON.stringify({wins: winnerHamster.wins -1,
+            games: winnerHamster.games -1}),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"}
+        })
+
+        await fetch('/matches/'+match.loserId, {
+            method: 'PUT',
+            body: JSON.stringify(
+                {defeats: loserHamster.defeats -1,
+                games: loserHamster.games -1}),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8" }
+        }) */
+
         getMatches()
     }
 
@@ -63,7 +90,8 @@ async function getMatches() {
     return (
         <section className="match-card-container">
             
-            {newMatchesArray?.map(match => 
+            {(newMatchesArray/*  && winnerHamster && loserHamster */)?
+            newMatchesArray.map(match => 
             <section className="match-card" key={match.id}>
                 <article>
                     <h3>Vinnare</h3>
@@ -77,8 +105,9 @@ async function getMatches() {
                     <h4>{match.loserName}</h4>
                 </article>
                   
-                <button onClick={()=>deleteMatch(match.id)}> Ta bort match</button>
-            </section>)}
+                <button onClick={()=>deleteMatch(match/* , winnerHamster, loserHamster */)}> Ta bort match</button>
+            </section>)
+            : "Laddar..."}
        </section>
     )
 }
