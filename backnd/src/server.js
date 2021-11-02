@@ -10,7 +10,7 @@ app.use( express.urlencoded({extended: true}) )
 app.use( express.json() )
 app.use( cors() ) 
 
-app.use( '/', express.static(__dirname + '/../../public') )
+app.use( '/', express.static(__dirname + '/../../build') )
 app.use( '/img', express.static(__dirname + '/../hamsters') )
 
 
@@ -40,7 +40,7 @@ app.get('/losers', async (req, res) => {
 })
 
 app.get('*', (req, res) => {
-	res.sendFile(__dirname + '/../../public/index.html')
+	res.sendFile(__dirname + '/../../build/index.html')
 })
 
 app.listen(PORT, () => {
