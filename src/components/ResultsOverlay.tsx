@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 interface OverlayProps {
     winner: Hamster,
     loser: Hamster,
-    setShowResults: (param: boolean) => void
+    setShowResults: () => void
 }
 
 
@@ -23,7 +23,9 @@ const ResultsOverlay = ({ winner, loser, setShowResults }: OverlayProps) => {
                     <div className="results-card-container">
                         <div className="top-five-card">
                             <h3>Vinnare! </h3>
+                            <figure>
                             <img src={`/img/${winner.imgName}`} alt={winner.name} />
+                            </figure>
                             <h3>{winner.name}</h3>
 
                             <p><span>Ålder:</span> {winner.age}</p>
@@ -35,7 +37,9 @@ const ResultsOverlay = ({ winner, loser, setShowResults }: OverlayProps) => {
                         </div>
                         <div className="top-five-card">
                             <h3>Förlorare!</h3>
+                            <figure>
                             <img src={`/img/${loser.imgName}`} alt={loser.name} />
+                            </figure>
                             <h3>{loser.name}</h3>
 
                             <p><span>Ålder:</span> {loser.age}</p>
@@ -46,7 +50,7 @@ const ResultsOverlay = ({ winner, loser, setShowResults }: OverlayProps) => {
                             <p><span>Favvomat: </span>{loser.favFood}</p>
                         </div>
                     </div>
-                    <button onClick={event => setShowResults(false)}> Ny match</button>
+                    <button onClick={setShowResults}> Ny match</button>
                 </>
                 : <p>'Nothing to see here...'</p>}</div>
     )

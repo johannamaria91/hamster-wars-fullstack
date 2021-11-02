@@ -68,12 +68,12 @@ const Gallery = () => {
 
                         <section className="grid-container">
 
-
+                        
                             {hamsterArray?.map(hamster =>
                                 <section className="flip-card" key={hamster.id}>
                                     <section className="flip-card-inner">
                                         <article className="hamster-card-front" >
-                                            <figure><img src={`/img/${hamster.imgName}`} alt={hamster.name} /></figure>
+                                            <figure><img src={hamster.imgName.includes('https://') ? hamster.imgName : `/img/${hamster.imgName}` } alt={hamster.name} /></figure>
                                             <h3>{hamster.name}</h3>
                                         </article>
                                         <article className="hamster-card-back">

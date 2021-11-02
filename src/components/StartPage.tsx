@@ -30,16 +30,15 @@ const StartPage = () => {
     return (
         <section className="startpage">
             <h2>Hjälp oss att kora den sötaste hamstern!</h2>
-            <p>Gå till tävlings-fliken och välj den sötaste hamstern.</p>
+            <p>Gå till tävlings-fliken och klicka på den sötaste hamstern.</p>
             <p>I galleriet hittar du alla tävlande hamstrar och kan se all info om dem</p>
 
         {
             cutestHamster?.map(hamster => 
                  <section className="cutest-hamster" key="cutest">
-                <h3>The cutest hamster right now is: </h3>
-                <h2>{hamster.name}</h2>
+                <h3>Sötaste hamstern just nu: </h3>
                 <figure><img src={`/img/${hamster.imgName}`} alt="cutest hamster" /></figure>
-                
+                <h2>{hamster.name}</h2>
             </section>
                 
                 )

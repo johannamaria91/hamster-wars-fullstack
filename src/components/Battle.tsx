@@ -6,10 +6,14 @@ import NewBattle from './NewBattle'
 const Battle = () => {
    
     const [showResults, setShowResults] = useState<boolean>(false) 
-    const [winnerInfo, setWinnerInfo] = useState<Hamster>()
-    const [loserInfo, setLoserInfo] = useState<Hamster>()
+    const [winnerInfo, setWinnerInfo] = useState<Hamster | null>()
+    const [loserInfo, setLoserInfo] = useState<Hamster | null>()
    
-
+const clearResults = () => {
+    setShowResults(false)
+    setWinnerInfo(null)
+    setLoserInfo(null)
+}
   
         async function getUpdatedResults(winnerId: string, loserId:string) {
             const firstResponse = await fetch('/hamsters/'+winnerId)
@@ -83,7 +87,7 @@ const Battle = () => {
     return (
         <>
         {showResults && winnerInfo && loserInfo
-        ? <ResultsOverlay winner={winnerInfo} loser={loserInfo} setShowResults={setShowResults}/> 
+        ? <ResultsOverlay winner={winnerInfo} loser={loserInfo} setShowResults={clearResults}/> 
         : <NewBattle pickWinner={pickWinner} />} 
        </>
     )

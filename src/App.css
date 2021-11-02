@@ -54,9 +54,6 @@ main {
   padding: 1em;
 }
 
-.startpage h2 {
-  margin-block-start: 0;
-}
 .cutest-hamster {
   border: 1px solid var(--hamster-orange);
   border-radius: .5em;
@@ -175,25 +172,9 @@ main {
   cursor: pointer;
 }
 
-.add-hamster-overlay {
-  position: fixed;
-  background-color: rgba(0, 0, 0, 0.774);
-  height: 100vh;
-  width: 100vw;
-  top: 0em;
-  left: 0em;
-  z-index: 5;
-}
 
-.add-hamster-overlay > div {
-  padding:1em;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color:orange;
-  display: inline-block;
-}
+
+
 
 
 /* Statistics */
@@ -224,7 +205,7 @@ main {
   flex-direction: column;
   align-items: center;
   padding: 2em;
-  margin: 1em;
+  margin-bottom: 2em;
 }
 
 .top-five-card p {
@@ -329,8 +310,12 @@ main {
 .results-card-container {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
+}
+
+.results-card-container > div {
+  width: 20em;
 }
 
 .overlay {
@@ -349,4 +334,73 @@ button {
   color: var(--dark-grey);
   padding: 1em 2em;
   cursor: pointer;
+}
+
+/* Add hamster overlay */
+
+.add-hamster-overlay {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.774);
+  height: 100vh;
+  width: 100vw;
+  top: 0em;
+  left: 0em;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+  .form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--hamster-orange);
+  padding: 1em 0 3.5em;
+  width: 20em;
+  border-radius: 1em;
+}  
+
+.form > button:disabled {
+  cursor: default;
+  background-color: rgba(255, 253, 245, 0.514);
+  color: rgba(42, 44, 44, 0.644);
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column-reverse;
+  padding: 0 0 1em 0;
+}
+
+input {
+  height: 3em;
+  border-radius: 5em;
+  margin: .3em 0 0 0;
+  border: none;
+  padding: 0 1.4em;
+}
+
+.input-container label {
+  font-size: .75em;
+}
+
+.valid {
+  border: .25em solid rgb(8, 156, 8);
+}
+
+.invalid {
+  border: .25em solid rgb(177, 17, 17);
+}
+
+.form > h2 {
+  margin: 1.5em 0 1em;
+}
+
+.close-btn {
+  background: none;
+  font-size: 1.5em;
+  margin: 0;
+  padding: 0 0 0 .7em;
+  align-self: flex-start;
 }
