@@ -1,11 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
 body {
   --dark-grey: rgb(42 44 44);
   --hamster-orange: rgb(241, 166, 74);
   --almost-white: rgb(255, 253, 245);
+  min-height: 100vh;
+  background-color: var(--dark-grey);
+  font-family: 'Poppins', sans-serif;
+  
 }
+
+
 
 .app {
   text-align: center;
+  min-height: 100vh;
+ 
+
+  
 }
 
 header {
@@ -15,6 +27,8 @@ header {
   align-items: center;
   background-color: var(--hamster-orange);
   padding: 1em;
+  height: 10vh;
+  
 }
 
 header h1 {
@@ -45,13 +59,16 @@ nav a:hover {
 main {
   background-color: var(--dark-grey);
   color: var(--almost-white);
-  padding: 1.5em;
+  padding: 2.5em;
+  min-height: 90vh;
+  
 }
 
 /* Startpage */
 
 .startpage {
   padding: 1em;
+  
 }
 
 .cutest-hamster {
@@ -92,6 +109,7 @@ main {
   justify-items: center;
   align-items: center;
   grid-gap: 1em;
+  
  
 }
 
@@ -170,6 +188,12 @@ main {
   background: none;
   border: none;
   cursor: pointer;
+  margin-bottom: 0;
+}
+
+.matchwinners-btn {
+  margin: 0;
+  padding-top: 0;
 }
 
 
@@ -240,13 +264,17 @@ main {
 
 .match-card-container {
   padding: 2em;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min-content, 30em));
+  justify-content: center;
+  
+
 }
 
 .match-card {
-  margin: 0 2em 2em;
-  padding: 1em;
+  margin: 0 1em 2em;
+  padding: 1em 1em 1em 2em;
   height: 15em;
-  width: 30em;
   display: flex;
   flex-direction: row;
   text-align: center;
@@ -261,11 +289,24 @@ main {
   width: 10em;
 }
 
-.match-card img {
+.match-card > article img {
   object-fit: cover;
   width: 100%;
   height: 100%;
   border-radius: .5em;
+}
+
+.match-card > button {
+  align-self: flex-start;
+  background: none;
+  padding: 0 .2em 0 0;
+  margin: 0;
+  
+}
+
+.match-card > button > img {
+  height: 1.5em;
+  
 }
 
 
@@ -310,17 +351,16 @@ main {
 .results-card-container {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
+  gap: 2em;
 }
 
 .results-card-container > div {
-  width: 20em;
+  width: 15em;
 }
 
-.overlay {
-  padding: 1.5em;
-}
+
 
 .overlay h2{
   margin-block-start: 0;
@@ -369,8 +409,9 @@ button {
 
 .input-container {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   padding: 0 0 1em 0;
+  align-items: center;
 }
 
 input {
@@ -379,10 +420,32 @@ input {
   margin: .3em 0 0 0;
   border: none;
   padding: 0 1.4em;
+  font-size: .75em;
+  max-width: 12em;
 }
 
 .input-container label {
   font-size: .75em;
+  max-width: 16em;
+  /* display: none; */
+  text-align: center;
+  align-self: center;
+}
+
+.checkbox {
+  flex-direction: row;
+  padding: 0 5em;
+  text-align: left;
+  align-items: flex-end;
+  
+}
+
+
+
+.checkbox > label {
+  padding: 0 0 0 2em;
+  display: block;
+  text-align: left;
 }
 
 .valid {
@@ -391,6 +454,19 @@ input {
 
 .invalid {
   border: .25em solid rgb(177, 17, 17);
+}
+
+label {
+  display: none
+}
+
+label.valid {
+  display: none
+}
+
+label.invalid {
+  display: block;
+  border: none;
 }
 
 .form > h2 {

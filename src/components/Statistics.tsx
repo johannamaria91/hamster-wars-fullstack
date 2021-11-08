@@ -21,11 +21,11 @@ const Statistics = () => {
 
     return (
         <div className="top-five">
-            <section className="winners">  <h2>Top 5 most wins</h2>
+            <section className="winners">  <h2>5 bästa</h2>
                 {winnersArray?.map(hamster =>
                     <article key={hamster.id} className="top-five-card">
                         <figure>
-                            <img src={`/img/${hamster.imgName}`} alt={hamster.name} />
+                            <img src={hamster.imgName.includes('http') ? hamster.imgName : `/img/${hamster.imgName}` } alt={hamster.name} />
                         </figure>
                         <h3>{hamster.name}</h3>
                         <p><span>Ålder:</span> {hamster.age}</p>
@@ -37,11 +37,11 @@ const Statistics = () => {
                     </article>)}
             </section>
 
-            <section className="losers">  <h2>Top 5 most defeats</h2>
+            <section className="losers">  <h2>5 sämsta</h2>
                 {losersArray?.map(hamster => 
                 <article key={hamster.id} className="top-five-card">
                     <figure>
-                        <img src={`/img/${hamster.imgName}`} alt={hamster.name} />
+                        <img src={hamster.imgName.includes('http') ? hamster.imgName : `/img/${hamster.imgName}` } alt={hamster.name} />
                     </figure>
                     <h3>{hamster.name}</h3>
                     <p><span>Ålder:</span> {hamster.age}</p>

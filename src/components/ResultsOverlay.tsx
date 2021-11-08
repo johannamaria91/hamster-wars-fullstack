@@ -1,5 +1,4 @@
 import { Hamster } from "../models/Hamster";
-import { useState, useEffect } from 'react'
 /* import '../ResultsOverlay.css' */
 
 interface OverlayProps {
@@ -17,14 +16,15 @@ const ResultsOverlay = ({ winner, loser, setShowResults }: OverlayProps) => {
 
 
         <div className="overlay">
+             <button onClick={setShowResults}> Ny match</button>
             {winner && loser
                 ? <>
-                    <h2>And the winner is... {winner.name}</h2>
+                    <h2>And the winner is: {winner.name}!</h2>
                     <div className="results-card-container">
                         <div className="top-five-card">
                             <h3>Vinnare! </h3>
                             <figure>
-                            <img src={`/img/${winner.imgName}`} alt={winner.name} />
+                            <img src={winner.imgName.includes('http') ? winner.imgName : `/img/${winner.imgName}` } alt={winner.name} />
                             </figure>
                             <h3>{winner.name}</h3>
 
@@ -38,7 +38,7 @@ const ResultsOverlay = ({ winner, loser, setShowResults }: OverlayProps) => {
                         <div className="top-five-card">
                             <h3>Förlorare!</h3>
                             <figure>
-                            <img src={`/img/${loser.imgName}`} alt={loser.name} />
+                            <img src={loser.imgName.includes('http') ? loser.imgName : `/img/${loser.imgName}` } alt={loser.name} />
                             </figure>
                             <h3>{loser.name}</h3>
 
@@ -50,7 +50,7 @@ const ResultsOverlay = ({ winner, loser, setShowResults }: OverlayProps) => {
                             <p><span>Favvomat: </span>{loser.favFood}</p>
                         </div>
                     </div>
-                    <button onClick={setShowResults}> Ny match</button>
+                   
                 </>
                 : <p>'Nothing to see here...'</p>}</div>
     )

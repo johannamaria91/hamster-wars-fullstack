@@ -86,7 +86,7 @@ const Gallery = () => {
                                             <p>Favvomat: {hamster.favFood}</p>
                                             <button onClick={() => deleteHamster(hamster.id)}><img src={bin} alt="bin" /></button>
                                             {hamster.wins > 0
-                                            ? <button onClick={() => showDefeatedHamsters(hamster.id)} >Se alla hamstrar som {hamster.name} har vunnit över</button>
+                                            ? <button className="matchwinners-btn" onClick={() => showDefeatedHamsters(hamster.id)} >Se alla hamstrar som {hamster.name} har vunnit över</button>
                                         :  null}
                                         </article>
                                     </section>

@@ -9,36 +9,48 @@ interface MatchwinnersProps {
 }
 
 const MatchWinners = ({close, id}:MatchwinnersProps) => {
-    const [matchwinners, setMatchwinners] = useState<Hamster[]>([]) 
-
+    const [matchLosers, setMatchLosers] = useState<Hamster[]>([]) 
+ 
  useEffect(() => {
-    getMatchwinners(id)
- }, []) 
-
-
-    const getMatchwinners = async(id:string) => {
+    const getMatchLosers = async(id:string) => {
         const response = await fetch('/matchWinners/'+id)
         const data = await response.json()
 
-        data?.map(async (match: Match) => {
-          
-            const loser = await fetch('/hamsters/' + match.loserId)
-            const loserHamster = await loser.json()
+        let loserIds = data.map((match:Match) => match.loserId)
+        let uniqueLoserIds:string[] = []
+        loserIds.forEach((id:string) =>{
+            if (!uniqueLoserIds.includes(id)) {
+                uniqueLoserIds.push(id)
+            }
+        })
+        uniqueLoserIds.map(id => getLosers(id))
+        }    
+        
+      const getLosers = async(id:string) => {
+        const loser = await fetch('/hamsters/' + id)
+        const loserHamster = await loser.json()
 
-             setMatchwinners(matchwinners => [...matchwinners, loserHamster])
-        } )           
-       
-    }
+        setMatchLosers(matchLosers => [...matchLosers, loserHamster])
+      }
 
+    getMatchLosers(id)
+    
+ }, [id]) 
+
+
+    
+    
+
+ 
 
     return (
         <section className="grid-container">
 
-        {matchwinners?.map(hamster => 
-            <section className="flip-card" key={hamster.id}>
+        {matchLosers?.map(hamster => 
+            <section className="flip-card" key={hamster.id+hamster.name}>
                 <section className="flip-card-inner">
                      <article className="hamster-card-front" >
-                        <figure><img src={`/img/${hamster.imgName}`} alt={hamster.name}/></figure>
+                        <figure><img src={hamster.imgName.includes('http') ? hamster.imgName : `/img/${hamster.imgName}` } alt={hamster.name}/></figure>
                         <h3>{hamster.name}</h3>
                      </article>
                     <article className="hamster-card-back">

@@ -20,6 +20,8 @@ const Overlay = ({ close, addHamster }: OverlayProps) => {
     const [lovesIsTouched, setLovesIsTouched] = useState<boolean>(false)
     const [favFoodIsTouched, setFavFoodIsTouched] = useState<boolean>(false)
     const [imgNameIsTouched, setImgNameIsTouched] = useState<boolean>(false)
+/*     const [focusOff, setFocusOff] = useState<boolean>(false)
+ */    const [disabled, setDisabled] = useState<boolean>(false)
 
 
 
@@ -47,12 +49,42 @@ const Overlay = ({ close, addHamster }: OverlayProps) => {
     const lovesClass = lovesIsValid && lovesIsTouched ? 'valid' : lovesIsTouched ? 'invalid' : '';
 
     const foodIsValid = isValidFood(favFood)
-    const foodClass = foodIsValid && favFoodIsTouched ? 'valid' : favFoodIsTouched ? 'invalid' : '';
+    const foodClass = foodIsValid && favFoodIsTouched ? 'valid' : favFoodIsTouched ? 'invalid' : disabled? '' :'';
 
     const imgIsValid = isValidImg(imgName)
     const imgClass = imgIsValid && imgNameIsTouched ? 'valid' : imgNameIsTouched ? 'invalid' : '';
 
-    const formIsValid = nameIsValid && ageIsValid && lovesIsValid && foodIsValid && imgIsValid
+    const formIsValid = nameIsValid && ageIsValid && ageIsTouched && lovesIsValid && foodIsValid && imgIsValid
+
+    const imageCheckbox = () => {
+        setDisabled(!disabled)
+        setImgNameIsTouched(false)
+        setImgName('standard-hamster.png')
+    } 
+
+    function isValidImg(imgName: string): boolean {
+        let trueOrFalse = false;
+        if (disabled) {
+            trueOrFalse = true
+        }
+        if (imgName.length >= 7 && imgName.includes('http')) {// måste minst innehålla http://
+          /* if (focusOff) { */
+              checkIfImageExists(imgName, (exists:any) => {
+                  if (exists) {
+                    console.log('Image exists.')
+                    trueOrFalse = true
+                  } else {
+                    console.log('Image does not exist.')
+                    trueOrFalse = false
+                  }
+                });
+          /* } */
+        } return trueOrFalse; 
+       
+    }
+  
+    
+    
 
     return (
         <div className="add-hamster-overlay">
@@ -61,18 +93,18 @@ const Overlay = ({ close, addHamster }: OverlayProps) => {
             <button className="close-btn" onClick={close}>✖️</button>
             <h2>Lägg till ny hamster</h2>
                 <section className="input-container">
-                    <input type="text" /* placeholder="Hamsterns namn"  */
+                    <input type="text" placeholder="Hamsterns namn" 
                         value={name}
                         onChange={event => setName(event.target.value)} className={nameClass} onClick={() => setNameIsTouched(true)}/>
-                    <label className='filled'> Hamsterns namn </label>
+                    <label className={nameClass}>Ett hamsternamn behöver vara minst 2 tecken långt </label>
                 </section>
 
                 <section className="input-container">
-                    <input type="number" /* placeholder="Hamsterns ålder"  */
-                        value={age}
-                        min="0"
+                    <input type="number" placeholder={ageIsTouched? "0" :"Hamsterns ålder"} 
+                        
+                        
                         onChange={event => setAge(Number(event.target.value))} className={ageClass} onClick={() => setAgeIsTouched(true)}/>
-                    <label className='filled'> Hamsterns ålder </label>
+                    <label className={ageClass} >Hamsterns ålder bör vara ett heltal mellan 0 och ?</label>
                 </section>
 
                 <input type="hidden" placeholder="Antal matcher..."
@@ -88,25 +120,33 @@ const Overlay = ({ close, addHamster }: OverlayProps) => {
                     onChange={event => setDefeats(event.target.valueAsNumber)} />
 
                 <section className="input-container">
-                    <input type="text" /* placeholder="Hamstern älskar att..."  */
+                    <input type="text" placeholder="Hamstern älskar att..." 
                         value={loves}
                         onChange={event => setLoves(event.target.value)} className={lovesClass} onClick={() => setLovesIsTouched(true)}/>
-                    <label className='filled'> Hamstern älskar att... </label>
+                    <label className={lovesClass} >Fyll i hamsterns favoritaktivitet. Du behöver fylla i minst 2 tecken. </label>
                 </section>
 
                 <section className="input-container">
-                    <input type="text" /* placeholder="Hamsterns favoritmat"  */
+                    <input type="text" placeholder="Hamsterns favoritmat" 
                         value={favFood}
                         onChange={event => setFavFood(event.target.value)} className={foodClass} onClick={() => setFavFoodIsTouched(true)}/>
-                    <label className='filled'> Hamsterns favoritmat </label>
+                    <label className={foodClass} > Fyll i hamsterns favoritmat. Du behöver fylla i minst 2 tecken. </label>
                 </section>
 
                 <section className="input-container">
-                    <input type="text" /* placeholder="Bild på hamstern..."  */
+                    <input  type="text" placeholder="Bild på hamstern..." 
+                        disabled={disabled}
                         value={imgName}
-                        onChange={event => setImgName(event.target.value)} className={imgClass} onClick={() => setImgNameIsTouched(true)}/>
-                    <label className='filled'> Bild på hamstern... </label>
+                        onChange={event => setImgName(event.target.value)} className={imgClass} onClick={() => setImgNameIsTouched(true)} /* onBlur={()=>setFocusOff(true)} onFocus={()=>setFocusOff(false)} *//>
+                    <label className={imgClass} >Fyll i en giltig bildadress </label>
                 </section>
+
+                <section className="input-container checkbox">
+                    <input  type="checkbox" placeholder="Bild på hamstern..."  
+                        /* value={imgName} */
+                        onChange={event => setImgName('standard-image.png')} className={imgClass} onClick={imageCheckbox} /* onClick={() => setImgNameIsTouched(true)} */ /* onBlur={()=>setFocusOff(true)} onFocus={()=>setFocusOff(false)} *//>
+                   <label> Välj standard-bild. <br/>Klicka i rutan ifall du inte har en egen bild.  </label>
+               </section>
 
                 <button type="submit" onClick={handleAddHamster} disabled={!formIsValid}>Lägg till hamster</button>
 
@@ -126,7 +166,7 @@ function isValidAge(age: number): boolean {
 	if( isNaN(age) ) return false
 	if( age < 0 ) return false
 	let ageString = String(age)
-	if( ageString.includes(',') || ageString.includes('.') ) return false
+	if( ageString.includes(',') || ageString.includes('.')) return false
 	return true
 }
 
@@ -138,7 +178,26 @@ function isValidFood(food: string): boolean {
 	return food.length >= 2
 }
 
-function isValidImg(imgName: string): boolean {
-	return imgName.length >= 2
-}
+
+function checkIfImageExists(url:string, callback:any) {
+    const img = new Image();
+    img.src = url;
+    
+    if (img.complete) {
+      callback(true);
+    } else {
+      img.onload = () => {
+        callback(true);
+      };
+      
+      img.onerror = () => {
+        callback(false);
+      };
+    }
+  }
+  
+  
+
+
+
 export default Overlay

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import {Match} from '../models/Match'
-import {Hamster} from '../models/Hamster'
+import bin from '../icons/bin.svg'
+
 
 interface MatchWithNames {
     id: string,
@@ -81,34 +82,59 @@ async function getMatches() {
 
         getMatches()
     }
+    const [searchString, setSearchString] = useState<string>('')
+    const filteredMatches: MatchWithNames[] = filterMatches(newMatchesArray, searchString)
 
+    function filterMatches(matches: MatchWithNames[], searchString: string): MatchWithNames[] {
+        return matches.filter(match => {
+           if( searchString === '' ) {
+               // Visa alla matcher
+               return true
+           } else {
+               // Visa alla matcher som matchar söksträngen
+               const winner = match.winnerName.toLowerCase()
+               const loser = match.loserName.toLowerCase()
+               const search = searchString.toLowerCase()
+    
+               // Leta både i vinnare och förlorare för att få med alla matcher hamstern varit med i
+               return winner.includes(search) || loser.includes(search)
+    
+               
+           }
+       })
+    }
       
-        
-      
-    console.log(newMatchesArray)
+  
 
     return (
+        <>
+        <input type="text"
+            placeholder="Sök hamster..."
+			value={searchString}
+			onChange={event => setSearchString(event.target.value)}
+			/>
         <section className="match-card-container">
             
-            {(newMatchesArray/*  && winnerHamster && loserHamster */)?
-            newMatchesArray.map(match => 
+            {(newMatchesArray.length >0/*  && winnerHamster && loserHamster */)?
+            filteredMatches.map(match => 
             <section className="match-card" key={match.id}>
                 <article>
                     <h3>Vinnare</h3>
-                   <figure> <img src={`/img/${match.winnerImg}`} /></figure>
+                   <figure> <img src={match.winnerImg.includes('http') ? match.winnerImg : `/img/${match.winnerImg}`} alt={match.winnerName} /></figure>
                     <h4>{match.winnerName}</h4>
                 </article>
 
                 <article>
                     <h3>Förlorare</h3>
-                    <figure><img src={`/img/${match.loserImg}`} /></figure>
+                    <figure><img src={match.loserImg.includes('http') ? match.loserImg : `/img/${match.loserImg}`} alt={match.loserName}/></figure>
                     <h4>{match.loserName}</h4>
                 </article>
                   
-                <button onClick={()=>deleteMatch(match/* , winnerHamster, loserHamster */)}> Ta bort match</button>
+                <button onClick={()=>deleteMatch(match/* , winnerHamster, loserHamster */)}> <img src={bin} alt="bin" /></button>
             </section>)
-            : "Laddar..."}
+            : <><p>Inga matcher i historiken ännu.</p> <p>Gå till tävlingsfliken och spela en match!</p></>}
        </section>
+       </>
     )
 }
 
