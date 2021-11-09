@@ -34,6 +34,8 @@ const Overlay = ({ close, addHamster }: OverlayProps) => {
                 "Content-type": "application/json; charset=UTF-8"
             }
         })
+        console.log('fetchade')
+
         const newArray = await response.json()
         addHamster()
         close()

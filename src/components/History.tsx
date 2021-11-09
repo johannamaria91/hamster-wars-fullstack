@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import {Match} from '../models/Match'
 import bin from '../icons/bin.svg'
+import { Hamster } from "../models/Hamster"
 
 
 interface MatchWithNames {
@@ -15,10 +16,12 @@ interface MatchWithNames {
 
 const History = () => {
 
-const [newMatchesArray, setNewMatchesArray] = useState<MatchWithNames[]>([])
+const [newMatchesArray, setNewMatchesArray] = useState<Match[]>([])
 /* const [winnerHamster, setWinnerHamster] = useState<Hamster>()
 const [loserHamster, setLoserHamster] = useState<Hamster>()
  */
+const [allHamsters, setAllHamsters] = useState<Hamster[]>([])
+
 
 useEffect(()=> {
     
@@ -30,38 +33,30 @@ useEffect(()=> {
 async function getMatches() {
         setNewMatchesArray([])
         const response = await fetch('/matches')
+        console.log('fetchade')
+
         const matchesArray = await response.json()
+        setNewMatchesArray(matchesArray)
+        const response2 = await fetch('/hamsters')
+        console.log('fetchade')
+        const hamsters = await response2.json()
+        setAllHamsters(hamsters)
 
-        matchesArray?.map(async (match: Match) => {
-            const winner = await fetch('/hamsters/' + match.winnerId)
-            const winnerHamster = await winner.json()
+  
         
-            const loser = await fetch('/hamsters/' + match.loserId)
-            const loserHamster = await loser.json()
+        
+        
 
-            const newMatchObject: MatchWithNames = {
-            id: match.id,
-            winnerName: winnerHamster.name,
-            winnerImg: winnerHamster.imgName,
-            loserName: loserHamster.name,
-            loserImg: loserHamster.imgName,
-/*             winnerId: match.winnerId,
-            loserId: match.loserId
- */        } 
-/*         setWinnerHamster(winnerHamster)
-        setLoserHamster(loserHamster)           
- */        setNewMatchesArray(newMatchesArray => [...newMatchesArray, newMatchObject] )
-
-    })
         
     }
 
 
 
-    let deleteMatch = async (match: MatchWithNames, /* winnerHamster: Hamster, loserHamster:Hamster */) => {
+    let deleteMatch = async (match: Match, /* winnerHamster: Hamster, loserHamster:Hamster */) => {
         await fetch('/matches/'+match.id, {
             method: 'DELETE'
         }) 
+        console.log('fetchade')
 
        /*  await fetch('/matches/'+match.winnerId, {
             method: 'PUT',
@@ -82,57 +77,39 @@ async function getMatches() {
 
         getMatches()
     }
-    const [searchString, setSearchString] = useState<string>('')
-    const filteredMatches: MatchWithNames[] = filterMatches(newMatchesArray, searchString)
-
-    function filterMatches(matches: MatchWithNames[], searchString: string): MatchWithNames[] {
-        return matches.filter(match => {
-           if( searchString === '' ) {
-               // Visa alla matcher
-               return true
-           } else {
-               // Visa alla matcher som matchar söksträngen
-               const winner = match.winnerName.toLowerCase()
-               const loser = match.loserName.toLowerCase()
-               const search = searchString.toLowerCase()
-    
-               // Leta både i vinnare och förlorare för att få med alla matcher hamstern varit med i
-               return winner.includes(search) || loser.includes(search)
-    
-               
-           }
-       })
-    }
+  
       
   
 
     return (
         <>
-        <input type="text"
-            placeholder="Sök hamster..."
-			value={searchString}
-			onChange={event => setSearchString(event.target.value)}
-			/>
+    
         <section className="match-card-container">
             
             {(newMatchesArray.length >0/*  && winnerHamster && loserHamster */)?
-            filteredMatches.map(match => 
+            newMatchesArray.map(match => 
             <section className="match-card" key={match.id}>
-                <article>
-                    <h3>Vinnare</h3>
-                   <figure> <img src={match.winnerImg.includes('http') ? match.winnerImg : `/img/${match.winnerImg}`} alt={match.winnerName} /></figure>
-                    <h4>{match.winnerName}</h4>
-                </article>
 
-                <article>
-                    <h3>Förlorare</h3>
-                    <figure><img src={match.loserImg.includes('http') ? match.loserImg : `/img/${match.loserImg}`} alt={match.loserName}/></figure>
-                    <h4>{match.loserName}</h4>
-                </article>
+                {allHamsters.map(hamster => {
+                    if (hamster.id === match.winnerId) {
+                        return <article key={hamster.id}>
+                        <h3>Vinnare</h3>
+                       <figure> <img src={hamster.imgName.includes('http') ? hamster.imgName : `/img/${hamster.imgName}`} alt={hamster.imgName} /></figure>
+                        <h4>{hamster.name}</h4>
+                    </article> 
+                    } else if (hamster.id === match.loserId) {
+                        return <article key={hamster.id}>
+                        <h3>Förlorare</h3>
+                        <figure><img src={hamster.imgName.includes('http') ? hamster.imgName : `/img/${hamster.imgName}`} alt={hamster.imgName}/></figure>
+                        <h4>{hamster.name}</h4>
+                    </article>
+                    }
+                })}
+               
                   
                 <button onClick={()=>deleteMatch(match/* , winnerHamster, loserHamster */)}> <img src={bin} alt="bin" /></button>
             </section>)
-            : <><p>Inga matcher i historiken ännu.</p> <p>Gå till tävlingsfliken och spela en match!</p></>}
+            : <><p>Laddar matcher...</p></>}
        </section>
        </>
     )

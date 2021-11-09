@@ -9,6 +9,8 @@ try {
     useEffect(() => {
         async function sendRequest() {
        const response = await fetch('/hamsters/cutest')
+       console.log('fetchade')
+
        const data = await response.json()
 
 

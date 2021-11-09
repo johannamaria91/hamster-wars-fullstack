@@ -33,11 +33,15 @@ const Gallery = () => {
         await fetch('/hamsters/' + id, {
             method: 'DELETE'
         })
+        console.log('fetchade')
+
         getHamsters()
     }
 
     async function getHamsters() {
         const response = await fetch('/hamsters')
+        console.log('fetchade')
+
         const hamsters = await response.json()
         setHamsterArray(hamsters)
     }

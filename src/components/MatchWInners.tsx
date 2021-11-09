@@ -14,6 +14,8 @@ const MatchWinners = ({close, id}:MatchwinnersProps) => {
  useEffect(() => {
     const getMatchLosers = async(id:string) => {
         const response = await fetch('/matchWinners/'+id)
+        console.log('fetchade')
+
         const data = await response.json()
 
         let loserIds = data.map((match:Match) => match.loserId)
@@ -28,6 +30,8 @@ const MatchWinners = ({close, id}:MatchwinnersProps) => {
         
       const getLosers = async(id:string) => {
         const loser = await fetch('/hamsters/' + id)
+        console.log('fetchade')
+
         const loserHamster = await loser.json()
 
         setMatchLosers(matchLosers => [...matchLosers, loserHamster])

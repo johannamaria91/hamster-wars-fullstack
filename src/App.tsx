@@ -15,19 +15,22 @@ function App() {
 
   return (
     <div className="app">
+       
       <header>
+    
         <section className="logo">
           <img src={hamster} alt="hamster-logo"/>
           <h1>Hamster Wars</h1>
         </section>
         <nav>
-          
-          <Link to="/"> Start </Link>
-          <Link to="/battle"> Tävla</Link>
-          <Link to="/gallery"> Galleri </Link>
-          <Link to="/stats"> Statistik </Link>
-          <Link to="/history"> Historik </Link>
-          {/* <Link to="/error"> Felaktig länk </Link></nav> */}
+        
+            <Link to="/"> Start </Link>
+            <Link to="/battle"> Tävla</Link>
+            <Link to="/gallery"> Galleri </Link>
+            <Link to="/stats"> Statistik </Link>
+            <Link to="/history"> Historik </Link>
+            {/* <Link to="/error"> Felaktig länk </Link></nav> */}
+      
           
         </nav>
       </header>

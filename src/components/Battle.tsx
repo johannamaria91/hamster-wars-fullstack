@@ -17,10 +17,14 @@ const Battle = () => {
 
     async function getUpdatedResults(winnerId: string, loserId: string) {
         const firstResponse = await fetch('/hamsters/' + winnerId)
+        console.log('fetchade')
+
         const winner = await firstResponse.json()
         setWinnerInfo(winner)
 
         const secondResponse = await fetch('/hamsters/' + loserId)
+        console.log('fetchade')
+
         const loser = await secondResponse.json()
         setLoserInfo(loser)
     }
@@ -49,6 +53,8 @@ const Battle = () => {
                 "Content-type": "application/json; charset=UTF-8"
             }
         });
+        console.log('fetchade')
+
 
         await fetch('/hamsters/' + winnerHamster.id, {
             method: 'PUT',
@@ -58,6 +64,8 @@ const Battle = () => {
 
             }
         })
+        console.log('fetchade')
+
 
         await fetch('/hamsters/' + loserHamster.id, {
             method: 'PUT',
@@ -66,6 +74,7 @@ const Battle = () => {
                 "Content-type": "application/json; charset=UTF-8"
             }
         })
+        console.log('fetchade')
 
 
 

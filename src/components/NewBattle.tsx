@@ -33,16 +33,21 @@ const NewBattle = ({pickWinner}:NewBattleProps) => {
     useEffect(() => {
         async function sendRequest() {
             const firstResponse = await fetch('/hamsters/random')
+            console.log('fetchade')
+
             const firstHamster = await firstResponse.json()
             setFirstHamster(firstHamster)
 
             const secondResponse = await fetch('/hamsters/random')
+            console.log('fetchade')
             const maybeSecondHamster = await secondResponse.json()
             
             let secondHamster = maybeSecondHamster
             while (firstHamster.id === maybeSecondHamster.id) {
                 console.log('det va samma')
                 const secondResponse = await fetch('/hamsters/random')
+                console.log('fetchade')
+
                 const maybeSecondHamster = await secondResponse.json()
                 secondHamster = maybeSecondHamster
             }
