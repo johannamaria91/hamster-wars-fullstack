@@ -4,22 +4,12 @@ import bin from '../icons/bin.svg'
 import { Hamster } from "../models/Hamster"
 
 
-interface MatchWithNames {
-    id: string,
-    winnerName: string,
-    winnerImg: string,
-    loserName: string,
-    loserImg: string,
-/*     winnerId: string,
-    loserId: string
- */}
+
 
 const History = () => {
 
 const [newMatchesArray, setNewMatchesArray] = useState<Match[]>([])
-/* const [winnerHamster, setWinnerHamster] = useState<Hamster>()
-const [loserHamster, setLoserHamster] = useState<Hamster>()
- */
+
 const [allHamsters, setAllHamsters] = useState<Hamster[]>([])
 
 
@@ -33,47 +23,48 @@ useEffect(()=> {
 async function getMatches() {
         setNewMatchesArray([])
         const response = await fetch('/matches')
-        console.log('fetchade')
+        
 
         const matchesArray = await response.json()
         setNewMatchesArray(matchesArray)
         const response2 = await fetch('/hamsters')
-        console.log('fetchade')
+        
         const hamsters = await response2.json()
         setAllHamsters(hamsters)
-
-  
-        
-        
-        
 
         
     }
 
 
 
-    let deleteMatch = async (match: Match, /* winnerHamster: Hamster, loserHamster:Hamster */) => {
+    let deleteMatch = async (match: Match) => {
         await fetch('/matches/'+match.id, {
             method: 'DELETE'
         }) 
-        console.log('fetchade')
+        
 
-       /*  await fetch('/matches/'+match.winnerId, {
+        let winner = allHamsters.find(hamster => match.winnerId === hamster.id)
+        let loser = allHamsters.find(hamster => match.loserId === hamster.id)
+
+        if (!winner || !loser) {
+            return 
+        }
+       await fetch('/hamsters/'+match.winnerId, {
             method: 'PUT',
-            body: JSON.stringify({wins: winnerHamster.wins -1,
-            games: winnerHamster.games -1}),
+            body: JSON.stringify({wins: winner.wins -1,
+            games: winner.games -1}),
             headers: {
                 "Content-type": "application/json; charset=UTF-8"}
         })
 
-        await fetch('/matches/'+match.loserId, {
+        await fetch('/hamsters/'+match.loserId, {
             method: 'PUT',
             body: JSON.stringify(
-                {defeats: loserHamster.defeats -1,
-                games: loserHamster.games -1}),
+                {defeats: loser.defeats -1,
+                games: loser.games -1}),
             headers: {
                 "Content-type": "application/json; charset=UTF-8" }
-        }) */
+        }) 
 
         getMatches()
     }
@@ -86,7 +77,7 @@ async function getMatches() {
     
         <section className="match-card-container">
             
-            {(newMatchesArray.length >0/*  && winnerHamster && loserHamster */)?
+            {(newMatchesArray.length >0)?
             newMatchesArray.map(match => 
             <section className="match-card" key={match.id}>
 
@@ -103,11 +94,13 @@ async function getMatches() {
                         <figure><img src={hamster.imgName.includes('http') ? hamster.imgName : `/img/${hamster.imgName}`} alt={hamster.imgName}/></figure>
                         <h4>{hamster.name}</h4>
                     </article>
+                    } else {
+                        return null
                     }
                 })}
                
                   
-                <button onClick={()=>deleteMatch(match/* , winnerHamster, loserHamster */)}> <img src={bin} alt="bin" /></button>
+                <button onClick={()=>deleteMatch(match)}> <img src={bin} alt="bin" /></button>
             </section>)
             : <><p>Laddar matcher...</p></>}
        </section>

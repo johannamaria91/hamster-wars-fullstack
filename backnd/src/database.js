@@ -1,10 +1,10 @@
 const admin = require("firebase-admin");
 let privatekey;
 
-if (process.env.HAMSTER_WARS_KEY) {
-    privatekey = JSON.parse(process.env.HAMSTER_WARS_KEY)
+if (process.env.HAMSTER_WARS_2_KEY) {
+    privatekey = JSON.parse(process.env.HAMSTER_WARS_2_KEY)
 } else {
-    privatekey = require("./secrets/hamster-wars-key.json");
+    privatekey = require("./secrets/hamster-wars-2-key.json");
 }
 
 

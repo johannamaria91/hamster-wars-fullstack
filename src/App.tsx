@@ -29,7 +29,6 @@ function App() {
             <Link to="/gallery"> Galleri </Link>
             <Link to="/stats"> Statistik </Link>
             <Link to="/history"> Historik </Link>
-            {/* <Link to="/error"> Felaktig länk </Link></nav> */}
       
           
         </nav>
@@ -42,8 +41,7 @@ function App() {
           <Route path="/gallery"> <Gallery /></Route>
           <Route path="/stats"> <Statistics/></Route>
           <Route path="/history"> <History/></Route>
-{/*           <Route path="/results" render={(OverlayProps) => <ResultsOverlay winnerId={''} loserId={''} {...OverlayProps} />}/> 
- */}        </Switch>
+        </Switch>
         
         
       </main>

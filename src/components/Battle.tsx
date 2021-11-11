@@ -17,13 +17,11 @@ const Battle = () => {
 
     async function getUpdatedResults(winnerId: string, loserId: string) {
         const firstResponse = await fetch('/hamsters/' + winnerId)
-        console.log('fetchade')
 
         const winner = await firstResponse.json()
         setWinnerInfo(winner)
 
         const secondResponse = await fetch('/hamsters/' + loserId)
-        console.log('fetchade')
 
         const loser = await secondResponse.json()
         setLoserInfo(loser)
@@ -53,7 +51,7 @@ const Battle = () => {
                 "Content-type": "application/json; charset=UTF-8"
             }
         });
-        console.log('fetchade')
+        
 
 
         await fetch('/hamsters/' + winnerHamster.id, {
@@ -64,7 +62,7 @@ const Battle = () => {
 
             }
         })
-        console.log('fetchade')
+        
 
 
         await fetch('/hamsters/' + loserHamster.id, {
@@ -74,22 +72,23 @@ const Battle = () => {
                 "Content-type": "application/json; charset=UTF-8"
             }
         })
-        console.log('fetchade')
-
-
-
-
-
+        
     }
 
-    function pickWinner(winnerHamster: Hamster, loserHamster: Hamster) {
-        doTheFetching(winnerHamster, loserHamster)
-        setShowResults(true)
+    /* async */ function pickWinner(winnerHamster: Hamster, loserHamster: Hamster) {
+       /* await */ doTheFetching(winnerHamster, loserHamster)
+       
+        
+        /* await */ setShowResults(true)
+        
+        
     }
 
     async function doTheFetching(winnerHamster: Hamster, loserHamster: Hamster) {
         await updateResults(winnerHamster, loserHamster)
         await getUpdatedResults(winnerHamster.id, loserHamster.id)
+        
+        
     }
 
 

@@ -7,29 +7,13 @@ body {
   min-height: 100vh;
   background-color: var(--dark-grey);
   font-family: 'Poppins', sans-serif;
-  
 }
-
-
 
 .app {
   text-align: center;
-  min-height: 100vh;
- 
-
-  
+  min-height: 100vh; 
 }
 
-/* header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--hamster-orange);
-  padding: 1em;
-  height: 10vh;
-  
-} */
 header {
   display: flex;
   flex-direction: column;
@@ -37,8 +21,6 @@ header {
   align-items: center;
   background-color: var(--hamster-orange);
   padding: .5em;
-  
-  
 }
 
 header h1 {
@@ -54,7 +36,6 @@ nav {
   flex-grow: 1;
   padding: .5em
 }
-
 
  nav a{
   text-decoration: none;
@@ -80,7 +61,25 @@ main {
 
 .startpage {
   padding: 1em;
-  
+}
+
+.start-info {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 2em;
+  padding: 1em 0 2em;
+}
+
+.start-info > article {
+  padding: 1em 4em;
+  background: var(--hamster-orange);
+  border-radius: .5em;
+  display: flex;
+  flex-direction: column;
+}
+
+.start-info article aside {
+  align-self: start;
 }
 
 .cutest-hamster {
@@ -110,11 +109,9 @@ main {
   width: 100%;
   height: 100%;
   border-radius: .5em;
-  
 }
 
 /* Gallery */ 
-
 
 .grid-container {
   display: grid;
@@ -124,15 +121,13 @@ main {
   align-items: center;
   grid-gap: 1em;
   padding: 2em 0 0 0;
-  
 }
 
 .flip-card {
   border-style: hidden;
   background-color: transparent;
   width: 17em;
-  height: 20em;
-  
+  height: 22em;
 }
 
 .flip-card:hover .flip-card-inner {
@@ -186,6 +181,10 @@ main {
   
 }
 
+.hamster-card-front h3 {
+  margin-top: 2em;
+}
+
 .hamster-card-back p {
   margin-block-start: 0;
   margin-block-end: 0;
@@ -206,28 +205,23 @@ main {
   padding: 0;
 }
 
-.matchwinners-btn {
+.hamster-card-back .matchwinners-btn {
   margin: 0;
-  padding-top: 0;
+  padding: 0 1em;
 }
-
-
-
-
-
 
 /* Statistics */
 
 .top-five {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   gap: 3em;
 }
 
 .top-five > section{
   width: 20em;
-  
 }
 
 .top-five h2 {
@@ -272,7 +266,6 @@ main {
   width: 100%;
   height: 100%;
   border-radius: .5em;
-  
 }
 
 /* History  */
@@ -282,31 +275,7 @@ main {
   display: grid;
   grid-template-columns: 90vw;
   justify-content: center;
-  
-
 }
-
-/* .match-card-container {
-  padding: 2em;
-  display: grid;
-  grid-template-columns: 100vw;
-  justify-content: center;
-  
-
-} */
-
-/* .match-card {
-  margin: 0 1em 2em;
-  padding: 1em 1em 1em 2em;
-  height: 15em;
-  display: flex;
-  flex-direction: row;
-  text-align: center;
-  align-items: center;
-  border: 1px solid var(--hamster-orange);
-  border-radius: .5em;
-  background-color: var(--hamster-orange);
-} */
 
 .match-card {
   margin: 0 0em 2em;
@@ -327,13 +296,6 @@ main {
   margin-inline-start: 0;
   margin-inline-end: 0;
 }
-
-/* .match-card figure {
-  height: 10em;
-  width: 10em;
-  margin-inline-start: 0;
-  margin-inline-end: 0;
-} */
 
 .match-card > article {
   padding: 0 .5em;
@@ -357,17 +319,11 @@ main {
 .match-card > button > img {
   height: 1.5em;
   padding: .5em 0 0 .5em;
-  
 }
 
 
 /* Battle */ 
 
-/* .battle {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-} */
 .battle {
   display: flex;
   flex-direction: column;
@@ -379,22 +335,12 @@ main {
   border-radius: .5em;
   background-color: var(--hamster-orange);
   text-align: center;
-  /* max-width: 20em; */
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 2em;
   margin: 1em 0.5em;
 }  
-
-/* .battle-card figure {
-  margin-block-start: 0;
-  margin-block-end: 0;
-  margin-inline-start: 0;
-  margin-inline-end: 0;
-  width: 13em;
-  height: 13em;
-} */
 
 .battle-card figure {
   margin-block-start: 0;
@@ -410,10 +356,7 @@ main {
   width: 100%;
   height: 100%;
   border-radius: .5em;
-  
 }
-
-
 
 .results-card-container {
   display: flex;
@@ -435,8 +378,6 @@ main {
   width: 30em;
 }
 
-
-
 .overlay h2{
   margin-block-start: 0;
 }
@@ -451,6 +392,7 @@ button {
   cursor: pointer;
   font-family: 'Poppins', sans-serif;
 }
+
 
 /* Add hamster overlay */
 
@@ -485,9 +427,9 @@ button {
 
 .input-container {
   display: flex;
-/*   flex-direction: column;
- */  padding: 0 0 2em 0;
+  flex-direction: column;
   align-items: center;
+  min-height: 4.5em;
 }
 
 input {
@@ -501,14 +443,9 @@ input {
 }
 
 .input-container label {
-  font-size: .75em;
-  max-width: 10em;
-  /* display: none; */
+  font-size: .7em;
   text-align: center;
   align-self: center;
-    position: absolute;
-    left: 54em;
-    text-align: left;
 }
 
 .checkbox {
@@ -516,7 +453,6 @@ input {
   padding: 0 5em;
   text-align: left;
   align-items: flex-end;
-  
 }
 
 .checkbox > input {
@@ -530,6 +466,7 @@ input {
   max-width: 12em;
   position:relative;
   left: 0;
+  font-size: .8em;
 }
 
 .valid {
@@ -564,6 +501,7 @@ label.invalid {
   padding: 0 0 0 .7em;
   align-self: flex-start;
 }
+
 
 /* DESKTOP */
 
@@ -609,6 +547,10 @@ label.invalid {
     padding: 2.5em;
     min-height: 90vh;
     
+  }
+
+  .start-info {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .battle {
@@ -680,6 +622,12 @@ label.invalid {
   .match-card > button > img {
     height: 1.5em;
     
+  }
+
+  .top-five {
+    
+    flex-direction: row;
+  
   }
 
 }

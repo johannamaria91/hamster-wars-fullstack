@@ -9,13 +9,13 @@ const Statistics = () => {
     useEffect(() => {
         async function sendRequest() {
             const firstResponse = await fetch('/winners')
-            console.log('fetchade')
+            
 
             const winnersArray = await firstResponse.json()
             setWinnersArray(winnersArray)
 
             const secondResponse = await fetch('/losers')
-            console.log('fetchade')
+                        
 
             const losersArray = await secondResponse.json()
             setLosersArray(losersArray)
