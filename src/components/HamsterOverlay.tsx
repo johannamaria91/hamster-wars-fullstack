@@ -20,8 +20,9 @@ const Overlay = ({ close, addHamster }: OverlayProps) => {
     const [lovesIsTouched, setLovesIsTouched] = useState<boolean>(false)
     const [favFoodIsTouched, setFavFoodIsTouched] = useState<boolean>(false)
     const [imgNameIsTouched, setImgNameIsTouched] = useState<boolean>(false)
-
-     const [disabled, setDisabled] = useState<boolean>(false)
+    const [disabled, setDisabled] = useState<boolean>(false)
+    const [imageYes, setImageYes] = useState<boolean>(false)
+    const [checked, setChecked] = useState<boolean>(false)
 
 
 
@@ -52,40 +53,58 @@ const Overlay = ({ close, addHamster }: OverlayProps) => {
     const foodIsValid = isValidFood(favFood)
     const foodClass = foodIsValid && favFoodIsTouched ? 'valid' : favFoodIsTouched ? 'invalid' : disabled? '' :'';
 
-    const imgIsValid = isValidImg(imgName)
+    const imgIsValid = isValidImg(imgName) && imageYes;
+    
     const imgClass = imgIsValid && imgNameIsTouched ? 'valid' : imgNameIsTouched ? 'invalid' : '';
 
-    const formIsValid = nameIsValid && ageIsValid && ageIsTouched && lovesIsValid && foodIsValid && imgIsValid
+    const formIsValid = nameIsValid && ageIsValid && ageIsTouched && lovesIsValid && foodIsValid && imgIsValid;
 
     const imageCheckbox = () => {
+        setChecked(!checked)
         setDisabled(!disabled)
         setImgNameIsTouched(false)
         setImgName('standard-hamster.png')
+        if(!checked){
+           setImageYes(true)    
+        } else {
+            setImageYes(false)
+        }
+        
     } 
 
-    function isValidImg(imgName: string): boolean {
-        let trueOrFalse = false;
+    
+    function isValidImg(imgName: string) {
+        
         if (disabled) {
-            trueOrFalse = true
-        }
-        if (imgName.length >= 7 && imgName.includes('http')) {
+            return true
+        } else if (imgName.length >= 7 && imgName.includes('http')) {
+        
+            return true 
+             
           
-              checkIfImageExists(imgName, (exists:any) => {
-                  if (exists) {
-                    console.log('Image exists.')
-                    trueOrFalse = true
-                  } else {
-                    console.log('Image does not exist.')
-                    trueOrFalse = false
-                  }
-                });
-          
-        } return trueOrFalse; 
+        } else {
+            
+            return true; 
+        } 
        
     }
-  
     
+    function imageExists() {
+        
+        return checkIfImageExists(imgName, (exists:any) => {
+         if (exists) {
+           console.log('Image exists.')
+           setImageYes(true)
+           
+           return true
+         } else {
+           console.log('Image does not exist.')
+           setImageYes(false)
+           return false
+         }
+       });
     
+   } 
 
     return (
         <div className="add-hamster-overlay">
@@ -97,7 +116,7 @@ const Overlay = ({ close, addHamster }: OverlayProps) => {
                     <input type="text" placeholder="Hamsterns namn" 
                         value={name}
                         onChange={event => setName(event.target.value)} className={nameClass} onClick={() => setNameIsTouched(true)}/>
-                    <label className={nameClass}>Ett hamsternamn behöver vara minst 2 tecken långt </label>
+                    <label className={nameClass}>Ett hamsternamn behöver vara minst 2 tecken långt</label>
                 </section>
 
                 <section className="input-container">
@@ -138,7 +157,7 @@ const Overlay = ({ close, addHamster }: OverlayProps) => {
                     <input  type="text" placeholder="Bild på hamstern..." 
                         disabled={disabled}
                         value={imgName}
-                        onChange={event => setImgName(event.target.value)} className={imgClass} onClick={() => setImgNameIsTouched(true)}/>
+                        onChange={event => setImgName(event.target.value)} className={imgClass} onClick={() => setImgNameIsTouched(true)} onBlur={()=>imageExists()}/>
                     <label className={imgClass} >Fyll i en giltig bildadress </label>
                 </section>
 
@@ -198,6 +217,7 @@ function checkIfImageExists(url:string, callback:any) {
   }
   
   
+ 
 
 
 
