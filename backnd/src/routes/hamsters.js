@@ -8,12 +8,14 @@ router.get('/', async (req, res) => {
     let hamsterArray = await getAll(HAMSTERS)
     //console.log(hamsterArray);
     res.send(hamsterArray)
+    console.log('GET all hamsters')
 })
 
 router.get('/cutest', async (req, res) => {
     let cutestHamster = await findCutestHamster()
-    console.log(cutestHamster)
+    //console.log(cutestHamster)
     res.status(200).send(cutestHamster)
+    console.log('GET cutest')
 })
 
 router.get('/random', async (req, res) => {
@@ -25,6 +27,7 @@ router.get('/random', async (req, res) => {
     let randomHamster = hamsterArray[randomHamsterIndex]
     console.log(`random hamster: ${randomHamster}`)
     res.send(randomHamster)
+    
 })
 
 router.get('/:id', async (req, res) => {
@@ -35,6 +38,7 @@ router.get('/:id', async (req, res) => {
     } else {
         res.sendStatus(404)
     }
+    console.log('GET /:id')
 })
 
 router.post('/', async (req, res) => {

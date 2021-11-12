@@ -8,6 +8,7 @@ const MATCHES = 'matches'
 router.get('/', async (req, res) => {
     let matchesArray = await getAll(MATCHES)
     res.send(matchesArray)
+    console.log('GET all matches')
 })
 
 router.get('/:id', async (req, res) => {
