@@ -102,7 +102,7 @@ async function getMatches() {
                   
                 <button onClick={()=>deleteMatch(match)}> <img src={bin} alt="bin" /></button>
             </section>)
-            : <><p>Laddar matcher...</p></>}
+            : <><p>Inga matcher ännu. Gå till tävlingsfliken och spela en match!</p></>}
        </section>
        </>
     )

@@ -115,7 +115,7 @@ const Overlay = ({ close, addHamster }: OverlayProps) => {
                 <section className="input-container">
                     <input type="text" placeholder="Hamsterns namn" 
                         value={name}
-                        onChange={event => setName(event.target.value)} className={nameClass} onClick={() => setNameIsTouched(true)}/>
+                        onChange={event => setName(event.target.value)} className={nameClass} onFocus={() => setNameIsTouched(true)}/>
                     <label className={nameClass}>Ett hamsternamn behöver vara minst 2 tecken långt</label>
                 </section>
 
@@ -123,7 +123,7 @@ const Overlay = ({ close, addHamster }: OverlayProps) => {
                     <input type="number" placeholder={ageIsTouched? "0" :"Hamsterns ålder"} 
                         
                         
-                        onChange={event => setAge(Number(event.target.value))} className={ageClass} onClick={() => setAgeIsTouched(true)}/>
+                        onChange={event => setAge(Number(event.target.value))} className={ageClass} onFocus={() => setAgeIsTouched(true)}/>
                     <label className={ageClass} >Hamsterns ålder bör vara ett positivt heltal</label>
                 </section>
 
@@ -142,14 +142,14 @@ const Overlay = ({ close, addHamster }: OverlayProps) => {
                 <section className="input-container">
                     <input type="text" placeholder="Hamstern älskar att..." 
                         value={loves}
-                        onChange={event => setLoves(event.target.value)} className={lovesClass} onClick={() => setLovesIsTouched(true)}/>
+                        onChange={event => setLoves(event.target.value)} className={lovesClass} onFocus={() => setLovesIsTouched(true)}/>
                     <label className={lovesClass} >Aktiviteten behöver vara minst två tecken. </label>
                 </section>
 
                 <section className="input-container">
                     <input type="text" placeholder="Hamsterns favoritmat" 
                         value={favFood}
-                        onChange={event => setFavFood(event.target.value)} className={foodClass} onClick={() => setFavFoodIsTouched(true)}/>
+                        onChange={event => setFavFood(event.target.value)} className={foodClass} onFocus={() => setFavFoodIsTouched(true)}/>
                     <label className={foodClass} > Favoritmaten behöver innehålla minst två tecken. </label>
                 </section>
 
@@ -157,7 +157,7 @@ const Overlay = ({ close, addHamster }: OverlayProps) => {
                     <input  type="text" placeholder="Bild på hamstern..." 
                         disabled={disabled}
                         value={imgName}
-                        onChange={event => setImgName(event.target.value)} className={imgClass} onClick={() => setImgNameIsTouched(true)} onBlur={()=>imageExists()}/>
+                        onChange={event => setImgName(event.target.value)} className={imgClass} onFocus={() => setImgNameIsTouched(true)} onBlur={()=>imageExists()}/>
                     <label className={imgClass} >Fyll i en giltig bildadress </label>
                 </section>
 
