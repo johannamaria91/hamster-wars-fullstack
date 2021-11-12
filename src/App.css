@@ -77,10 +77,19 @@ main {
   border-radius: .5em;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
-.start-info article aside {
-  align-self: start;
+.start-info h3 {
+  margin-block-start: 0;
+    margin-block-end: 0;
+    margin-top:1em;
+}
+
+
+.start-info button a {
+  color: var(--dark-grey);
+  text-decoration: none;
 }
 
 .cutest-hamster {
@@ -208,6 +217,7 @@ main {
   cursor: pointer;
   margin-bottom: 0;
   padding: 0;
+  box-shadow: none;
 }
 
 .hamster-card-back .matchwinners-btn {
@@ -318,7 +328,7 @@ main {
   background: none;
   padding: 0 .2em 0 0;
   margin: 0;
-  
+  box-shadow: none;
 }
 
 .match-card > button > img {
@@ -397,6 +407,7 @@ button {
   padding: 1em 2em;
   cursor: pointer;
   font-family: 'Poppins', sans-serif;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 }
 
 
@@ -506,6 +517,7 @@ label.invalid {
   margin: 0;
   padding: 0 0 0 .7em;
   align-self: flex-start;
+  box-shadow: none;
 }
 
 

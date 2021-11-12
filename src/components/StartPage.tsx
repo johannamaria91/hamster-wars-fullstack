@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Hamster } from '../models/Hamster'
 
 
@@ -60,20 +61,24 @@ const StartPage = () => {
                             <p>I Hamster Wars är det DU som bestämmer!</p>
 
             <section className="start-info">
-                <article><aside>1</aside>
+                <article><h3>Tävla</h3>
                 <p>Två hamstrar slumpas fram och du väljer vilken du tycker är sötast, vilket ger hamstern ett poäng</p>
-
+                <button><Link to="/battle">Tävla</Link></button>
                 </article>
-                <article><aside>2</aside>
-                <p> Under statistik kan du se vilka 5 hamstrar som vunnit flest matcher, och även vilka 5 som förlorat flest.</p>
-
-                </article>
-                <article><aside>3</aside>
-                <p> På historik-fliken kan du se alla matcher och även söka på en specifik hamster för att se alla dess matcher.</p>
-
-                </article>
-                <article><aside>4</aside>
+                <article><h3>Galleri</h3>
                 <p>I galleriet hittar du alla tävlande hamstrar och kan se all info om dem. Du kan även klicka för att se alla hamstrar hamstern vunnit mot!</p>
+                <button><Link to="/gallery">Galleri</Link></button>
+
+                </article>
+
+                <article><h3>Statistik</h3>
+                <p> Under statistik kan du se vilka 5 hamstrar som vunnit flest matcher, och även vilka 5 som förlorat flest.</p>
+                <button><Link to="/stats">Statistik</Link></button>
+
+                </article>
+                <article><h3>Historik</h3>
+                <p> På historik-fliken kan du se alla matcher och även söka på en specifik hamster för att se alla dess matcher.</p>
+                <button><Link to="/history">Historik</Link></button>
 
                 </article>
 
