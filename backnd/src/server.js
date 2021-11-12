@@ -39,7 +39,7 @@ app.get('/losers', async (req, res) => {
     res.status(200).send(losers)
 })
 
-app.get('/*', (req, res) => {
+app.get('*', (req, res) => {
 	res.sendFile(__dirname + '/../../build/index.html')
 })
 
